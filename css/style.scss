@@ -1,0 +1,82 @@
+
+//Commande utiles pour sass
+//Installation : npm install -g sass
+//Compilation du fichier .scss : sass --watch input.scss output.css
+//Pour toute autre question y'a la doc : https://sass-lang.com/
+
+//Variables. On déclare des variables dont nous allons nous reservir par la suite. 
+
+$rose :black;
+$couleur : pink;
+
+//Héritage : Pour faire hériter des classes d'un model existant
+%model{
+    border:8px solid #ccc;
+    padding:40px;
+    background:#dedede;
+    margin-bottom:20px;
+}
+
+//Mixins : Pour des groupes de déclaration CSS que vous souhaitez réutiliser
+@mixin border-radius($angle){
+    border-radius: $angle;
+    -moz-border-radius: $angle;
+    -webkit-border-radius: $angle;
+}
+
+
+//CSS Comme on a l'habitude de la faire
+p{
+    color:$rose;
+}
+
+.box{
+    height:150px; 
+    width:150px;
+    background:red;
+    border: 5px solid $rose;
+    @include border-radius(100px)
+}
+
+//le Nesting ou l'imbrication des sélecteurs.
+.menuheader{
+    ul{
+        margin:0;
+        padding: 0;
+        list-style-type: none;
+    }
+    li{
+        display: inline-block;
+    }
+    a{
+        color: $rose;
+        text-decoration:none ;
+        &:hover{
+            color:black;
+            &:before{
+                content:"+"
+            }
+        }
+        &:before{
+            content:"-"
+        }
+        & .camilletuvoulaisdusassmaisontentendsplus{
+            color:blue
+        }
+    }
+}
+
+.bonjour{
+    @extend %model;
+    @include border-radius(100px)
+
+}
+
+.aurevoir{
+    @extend %model;
+    background:red  ;
+    color:black
+}
+
+@import 'camille';
+
